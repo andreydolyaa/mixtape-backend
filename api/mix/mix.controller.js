@@ -17,9 +17,9 @@ async function getMixs(req, res) {
 }
 
 async function getMix(req, res) {
-    console.log('mix controller',req.params.id)
+    //console.log('mix controller',req.params.id)
     const mix = await mixService.getById(req.params.id)
-    console.log('mix controller',mix)
+    //console.log('mix controller',mix)
     res.send(mix)
 }
 
@@ -51,6 +51,7 @@ async function addMix(req, res) {
 
 async function updateMix(req, res) {
     const mix = req.body;
+    console.log('controlller updateMix',mix)
     await mixService.update(mix)
     res.send(mix)
 }

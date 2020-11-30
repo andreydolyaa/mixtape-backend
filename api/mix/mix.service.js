@@ -1,7 +1,7 @@
 const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
  
-
+ 
 async function query(filterBy = {}) {
     // TODO: Build the criteria with $regex
      const criteria = _buildCriteria(filterBy)
@@ -72,9 +72,9 @@ async function add(mix) {
 async function update(mix) {
     const collection = await dbService.getCollection('mix')
     mix._id = ObjectId(mix._id);
-
+    console.log('service update(mix)',mix)
     try {
-        await collection.replaceOne({ _id: mix._id }, { $set: mix })
+        await collection.replaceOne({ '_id': mix._id }, { $set: mix })
         return mix
     } catch (err) {
         console.log(`ERROR: cannot update mix ${mix._id}`)
