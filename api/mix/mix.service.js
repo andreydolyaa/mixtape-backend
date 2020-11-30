@@ -82,6 +82,7 @@ async function update(mix) {
     }
 }
 
+
 function _buildCriteria(filterBy) {
     const criteria = {};
     if (filterBy.name) {

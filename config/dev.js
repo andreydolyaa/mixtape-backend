@@ -1,4 +1,11 @@
+// module.exports = {
+//   //"dbURL": "mongodb://localhost:27017",
+//   "dbURL": "mongodb+srv://harel:hareldev$@cluster0.sxgml.mongodb.net/mixDB?retryWrites=true&w=majorit"
+// }
+
+
 module.exports = {
   //"dbURL": "mongodb://localhost:27017",
-  "dbURL": "mongodb+srv://harel:hareldev$@cluster0.sxgml.mongodb.net/mixDB?retryWrites=true&w=majorit",
+  //&w=majorit
+  "dbURL": "mongodb+srv://harel:hareldev$@cluster0.sxgml.mongodb.net/mixDB?retryWrites=true",
 }
