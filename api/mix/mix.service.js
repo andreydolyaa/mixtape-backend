@@ -72,11 +72,7 @@ async function add(mix) {
 async function update(mix) {
     const collection = await dbService.getCollection('mix')
     mix._id = ObjectId(mix._id);
-<<<<<<< HEAD
     console.log('service update(mix)',mix)
-=======
-    console.log('mixId', mix._id);
->>>>>>> 7eabaa6b7db4562636783fc366e31203725216dd
     try {
         await collection.replaceOne({ '_id': mix._id }, { $set: mix })
         return mix
