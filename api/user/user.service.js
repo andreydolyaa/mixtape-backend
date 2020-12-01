@@ -1,6 +1,5 @@
 
 const dbService = require('../../services/db.service')
-const reviewService = require('../review/review.service')
 const ObjectId = require('mongodb').ObjectId
  
 module.exports = {
@@ -16,7 +15,7 @@ async function query(filterBy = {}) {
     const criteria = _buildCriteria(filterBy)
     const collection = await dbService.getCollection('user')
     try {
-        const users = await collection.find(criteria).toArray();
+        const users = await collection.find().toArray();
         users.forEach(user => delete user.password);
 
         return users
@@ -31,13 +30,6 @@ async function getById(userId) {
     try {
         const user = await collection.findOne({ '_id': ObjectId(userId) })
         delete user.password
-
-        user.givenReviews = await reviewService.query({ byUserId: ObjectId(user._id) })
-        user.givenReviews = user.givenReviews.map(review => {
-            delete review.byUser
-            return review
-        })
-
 
         return user
     } catch (err) {
@@ -92,12 +84,12 @@ async function add(user) {
 
 function _buildCriteria(filterBy) {
     const criteria = {};
-    if (filterBy.txt) {
-        criteria.username = filterBy.txt
-    }
-    if (filterBy.minBalance) {
-        criteria.balance = { $gte: +filterBy.minBalance }
-    }
+    // if (filterBy.txt) {
+    //     criteria.username = filterBy.txt
+    // }
+    // if (filterBy.minBalance) {
+    //     criteria.balance = { $gte: +filterBy.minBalance }
+    // }
     return criteria;
 }
 
