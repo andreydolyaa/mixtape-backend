@@ -5,7 +5,6 @@ module.exports = connectSockets
 var msgs = []
 function connectSockets(io) {
     io.on('connection', socket => {
-        console.log('SOCKET CONNECTED');
         socket.emit('message history', msgs);
         socket.on('is typing', isTyping => {
                 io.to(socket.myRoom).emit('type msg',isTyping);
