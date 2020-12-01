@@ -30,22 +30,21 @@ if (process.env.NODE_ENV === 'production') {
 }    
  
 // socket section 
-var msgs = []
-io.on('connection', (socket) => {
-    console.log(socket);
-    socket.emit('msgHistory', msgs)
+// var msgs = []
+// io.on('connection', (socket) => {
+//     socket.emit('msgHistory', msgs)
 
-    io.emit('user connect')
+//     io.emit('user connect')
 
-    socket.on('msgSent', (msg) => {
-        console.log('Got msg', msg);
-        msgs.push(msg)
-        io.emit('msgBeam', msg);
-    });
-    socket.on('disconnect', () => {
-        io.emit('user disconnected', { txt: 'Someone just left', from: 'System' })
-    });
-});
+//     socket.on('msgSent', (msg) => {
+//         console.log('Got msg', msg);
+//         msgs.push(msg)
+//         io.emit('msgBeam', msg);
+//     });
+//     socket.on('disconnect', () => {
+//         io.emit('user disconnected', { txt: 'Someone just left', from: 'System' })
+//     });
+// });
  
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')

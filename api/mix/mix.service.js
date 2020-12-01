@@ -24,7 +24,6 @@ async function query(filterBy = {}) {
 
 
 async function getById(mixId) {
-    console.log('mix service getById',mixId,typeof mixId)
     const collection = await dbService.getCollection('mix')
     try {
         const mix = await collection.findOne({ '_id': ObjectId(mixId) })
@@ -45,7 +44,6 @@ async function getById(mixId) {
 }
  
 async function remove(mixId) {
-    console.log('mix service remove',mixId,typeof mixId)
     const collection = await dbService.getCollection('mix')
     try {
         //bjectId(mixId)
@@ -58,7 +56,6 @@ async function remove(mixId) {
 
 
 async function add(mix) {
-    console.log('add mix',mix)
     const collection = await dbService.getCollection('mix')
     try {
         await collection.insertOne(mix);
@@ -72,8 +69,6 @@ async function add(mix) {
 async function update(mix) {
     const collection = await dbService.getCollection('mix')
     mix._id = ObjectId(mix._id);
-    console.log('service update(mix)',mix)
-    console.log('mixId', mix._id);
     try {
         await collection.replaceOne({ '_id': mix._id }, { $set: mix })
         return mix
