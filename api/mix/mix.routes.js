@@ -11,7 +11,7 @@ router.get('/', getMixs) //requireUser
 router.get('/:id', getMix) //requireUser
 
 router.post('/' , addMix) //,requireAdmin
-router.put('/', updateMix) //, requireAdmin
+router.put('/:id', updateMix) //, requireAdmin
 router.delete('/:id', deleteMix) //, requireAdmin
 
 module.exports = router

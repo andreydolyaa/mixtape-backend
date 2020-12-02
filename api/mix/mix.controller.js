@@ -50,10 +50,11 @@ async function addMix(req, res) {
 }
 
 async function updateMix(req, res) {
-    try{
 
+    try{
         const mix = req.body;
         console.log('controlller updateMix',mix)
+        
         await mixService.update(mix)
         res.send(mix)
     }catch(err){

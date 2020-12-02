@@ -67,10 +67,11 @@ async function add(mix) {
 }
 
 async function update(mix) {
+    console.log('MIX BACK SERVICE : ',mix);
     const collection = await dbService.getCollection('mix')
     mix._id = ObjectId(mix._id);
     try {
-        await collection.replaceOne({ '_id': mix._id }, { $set: mix })
+        await collection.updateOne({ _id: mix._id }, { $set: mix })
         return mix
     } catch (err) {
         console.log(`ERROR: cannot update mix ${mix._id}`)
