@@ -50,10 +50,15 @@ async function addMix(req, res) {
 }
 
 async function updateMix(req, res) {
-    const mix = req.body;
-    console.log('controlller updateMix',mix)
-    await mixService.update(mix)
-    res.send(mix)
+    try{
+
+        const mix = req.body;
+        console.log('controlller updateMix',mix)
+        await mixService.update(mix)
+        res.send(mix)
+    }catch(err){
+        console.log(' CUS AMAK ERORR IN UPDATEING BLYAT !!!!!!!!!!!!! :',err);
+    }
 }
 
 module.exports = {
