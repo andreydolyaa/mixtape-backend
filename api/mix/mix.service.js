@@ -35,7 +35,7 @@ async function getById(mixId) {
        //     return review
        // })
 
-       console.log(`finding mix ${mix}`)
+    //    console.log('finding mix' ,mix)
         return mix
     } catch (err) {
         console.log(`ERROR: while finding mix ${mixId}`)
