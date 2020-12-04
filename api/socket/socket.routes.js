@@ -13,8 +13,12 @@ function connectSockets(io) {
                 io.to(socket.myRoom).emit('stop type msg',isTyping);
         })
         socket.on('send message', message => {
+            if(!message.msg.name){
+                message.msg.name = 'Anonymous';
+            }
             msgs.push(message)
             io.to(socket.myRoom).emit('chat message', message.msg);
+            console.log('maessagse msg : ',message.msg);
         })
         socket.on('set-song-playing', song => {
             io.to(socket.myRoom).emit('play-song',song);
@@ -77,7 +81,14 @@ function connectSockets(io) {
             io.to(socket.myRoom).emit('sync-songs-time',time);
         })
 
+        socket.on('newTime',time => {
+            io.to(socket.myRoom).emit('setNewTime',time);
+        })
+
+
         socket.on('join room', room => {
+            socket.username = 'user';
+            io.to(room).emit('user joined',{name:'System message',txt:'New user has joind the chat'});
             socket.join(room);
             socket.myRoom = room;
         })
