@@ -52,11 +52,29 @@ function connectSockets(io) {
         })
 
 
+        // socket.on('send-song-to-all', song => {
+        //     io.to(socket.myRoom).emit('play-song',song)
+        // })
         socket.on('send-song-to-all', song => {
             io.to(socket.myRoom).emit('play-song',song)
         })
         socket.on('play-preview-curr-song', song => {
             io.to(socket.myRoom).emit('play-song-old' ,song)
+        })
+
+        socket.on('move-to-new-time',currTimePlaying=>{
+            io.to(socket.myRoom).emit('song-time-new',currTimePlaying);
+        })
+        socket.on('song-time-new-semi',currTimePlaying=>{
+            io.to(socket.myRoom).emit('song-time-final',currTimePlaying);
+        })
+
+        socket.on('mix-updated',mix=>{
+            io.to(socket.myRoom).emit('mix-is-updated',mix);
+        })
+
+        socket.on('sync-songs',time => {
+            io.to(socket.myRoom).emit('sync-songs-time',time);
         })
 
         socket.on('join room', room => {
