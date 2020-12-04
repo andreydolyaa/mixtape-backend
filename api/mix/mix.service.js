@@ -14,10 +14,10 @@ async function query(filterBy = {}) {
        //         $match: filterBy
        //     }
        // ]).toArray()
-        //console.log('mixes',mixes)
+        ////console.log('mixes',mixes)
         return mixes
     } catch (err) {
-        console.log('ERROR: cannot find mixes')
+        //console.log('ERROR: cannot find mixes')
         throw err;
     }
 }
@@ -35,10 +35,10 @@ async function getById(mixId) {
        //     return review
        // })
 
-    //    console.log('finding mix' ,mix)
+    //    //console.log('finding mix' ,mix)
         return mix
     } catch (err) {
-        console.log(`ERROR: while finding mix ${mixId}`)
+        //console.log(`ERROR: while finding mix ${mixId}`)
         throw err;
     }
 }
@@ -49,7 +49,7 @@ async function remove(mixId) {
         //bjectId(mixId)
         await collection.deleteOne({ "_id": ObjectId(mixId) })
     } catch (err) {
-        console.log(`ERROR: cannot remove mix ${mixId}`)
+        //console.log(`ERROR: cannot remove mix ${mixId}`)
         throw err;
     }
 }
@@ -61,20 +61,20 @@ async function add(mix) {
         await collection.insertOne(mix);
         return mix;
     } catch (err) {
-        console.log(`ERROR: cannot insert mix`)
+        //console.log(`ERROR: cannot insert mix`)
         throw err;
     }
 }
 
 async function update(mix) {
-    console.log('MIX BACK SERVICE : ',mix);
+    //console.log('MIX BACK SERVICE : ',mix);
     const collection = await dbService.getCollection('mix')
     mix._id = ObjectId(mix._id);
     try {
         await collection.updateOne({ _id: mix._id }, { $set: mix })
         return mix
     } catch (err) {
-        console.log(`ERROR: cannot update mix ${mix._id}`)
+        //console.log(`ERROR: cannot update mix ${mix._id}`)
         throw err;
     }
 }

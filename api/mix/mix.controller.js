@@ -5,9 +5,9 @@ const mixService = require('./mix.service')
 
 async function getMixs(req, res) {
     try {
-        console.log()
+        //console.log()
         const mixes = await mixService.query(req.query)
-        //console.log('mixes',mixes)
+        ////console.log('mixes',mixes)
         res.send(mixes)
     } catch (err) {
         logger.error('Cannot get mixes', err);
@@ -17,14 +17,14 @@ async function getMixs(req, res) {
 }
 
 async function getMix(req, res) {
-    //console.log('mix controller',req.params.id)
+    ////console.log('mix controller',req.params.id)
     const mix = await mixService.getById(req.params.id)
-    //console.log('mix controller',mix)
+    ////console.log('mix controller',mix)
     res.send(mix)
 }
 
 async function deleteMix(req, res) {
-    console.log('mix controller delete',req.params.id)
+    //console.log('mix controller delete',req.params.id)
     try {
         await mixService.remove(req.params.id)
         res.end()
@@ -52,12 +52,12 @@ async function addMix(req, res) {
 async function updateMix(req, res) {
     try{
         const mix = req.body;
-        console.log('controlller updateMix',mix)
+        //console.log('controlller updateMix',mix)
         
         await mixService.update(mix)
         res.send(mix)
     }catch(err){
-        console.log(' CUS AMAK ERORR IN UPDATEING BLYAT !!!!!!!!!!!!! :',err);
+        //console.log(' CUS AMAK ERORR IN UPDATEING BLYAT !!!!!!!!!!!!! :',err);
     }
 }
 
