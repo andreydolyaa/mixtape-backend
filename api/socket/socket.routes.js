@@ -87,8 +87,9 @@ function connectSockets(io) {
 
 
         socket.on('join room', room => {
-            socket.username = 'user';
-            io.to(room).emit('user joined',{name:'System message',txt:'New user has joind the chat'});
+            // console.log('JOINED TO ROOM ',room);
+            // socket.username = 'user';
+            // io.to(room).emit('user joined',{name:'System message',txt:'New user has joind the chat'});
             socket.join(room);
             socket.myRoom = room;
         })
