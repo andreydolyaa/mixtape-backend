@@ -5,6 +5,9 @@ module.exports = connectSockets
 var msgs = []
 function connectSockets(io) {
     io.on('connection', socket => {
+        console.log('CONNECTED ID: ',socket.id);
+        var totalConnected = io.engine.clientsCount;
+        socket.emit('getCount',totalConnected);
         socket.emit('message history', msgs);
         socket.on('is typing', isTyping => {
                 io.to(socket.myRoom).emit('type msg',isTyping);
@@ -89,11 +92,27 @@ function connectSockets(io) {
         })
 
 
+        socket.on('setOn', time => {
+            io.to(socket.myRoom).emit('setOnTwo',time);
+        })
+
+        socket.on('disconnect', room => {
+            socket.leave(room)
+            console.log('DISCONNECTED ID: ',socket.id);
+        });
+
+
+
         socket.on('join room', room => {
             // console.log('JOINED TO ROOM ',room);
             // socket.username = 'user';
             // io.to(room).emit('user joined',{name:'System message',txt:'New user has joind the chat'});
+            if(socket.myRoom){
+                console.log('LEAVED ROOM ',socket.myRoom);
+                socket.leave(socket.myRoom)
+            }
             socket.join(room);
+            console.log('JOINED ROOM ',room);
             socket.myRoom = room;
         })
     })
