@@ -12,11 +12,13 @@ async function login(email, password) {
     const user = await userService.getByEmail(email)
     console.log('login user',user)
     if (!user) return Promise.reject('Invalid email or password')
-    const match = await bcrypt.compare(password, user.password)
-    if (!match) return Promise.reject('Invalid email or password')
-    if(user.password !== password || user.username !== email){
-           return Promise.reject('Invalid email or password')
-        }
+    console.log('userrrrrrr',user)
+    // const match = await bcrypt.compare(password, user.password)
+    // if (!match) return Promise.reject('Invalid email or password')
+    // console.log('userrrrrrr',password,email)
+    if(user.password !== password || user.email !== email){
+        return Promise.reject('Invalid email or password')
+    }
     delete user.password;
     return user;
 }
