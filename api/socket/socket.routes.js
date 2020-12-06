@@ -34,6 +34,10 @@ function connectSockets(io) {
             msgs=[];
         })
 
+        socket.on('send gif',gif =>{
+            io.to(socket.myRoom).emit('gif',gif);
+        })
+
         socket.on('first-song-play', () => {
             io.to(socket.myRoom).emit('start-first-song');
         })
