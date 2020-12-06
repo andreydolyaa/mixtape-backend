@@ -46,4 +46,4 @@ npm run build
 date order:
 name.json > name.service.js(back) > server.js(live nodemon server) > name.service.js(front) > name-app.js
 
-
+git push heroku HEAD:master

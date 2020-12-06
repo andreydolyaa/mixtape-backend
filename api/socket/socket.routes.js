@@ -6,6 +6,7 @@ var msgs = []
 function connectSockets(io) {
     io.on('connection', socket => {
         console.log('CONNECTED ID: ',socket.id);
+        // console.log('SOCKET LOG IN',socket);
         var totalConnected = io.engine.clientsCount;
         socket.emit('getCount',totalConnected);
         socket.emit('message history', msgs);
@@ -17,16 +18,21 @@ function connectSockets(io) {
         })
         socket.on('send message', message => {
             if(!message.msg.name){
-                message.msg.name = 'Anonymous';
+                message.msg.name = 'Guest';
             }
-            msgs.push(message)
+            msgs.unshift(message)
             io.to(socket.myRoom).emit('chat message', message.msg);
             console.log('maessagse msg : ',message.msg);
         })
         socket.on('set-song-playing', song => {
+            console.log('set-song-playing',song )
             io.to(socket.myRoom).emit('play-song',song);
         })
 
+        socket.on('clear chat',()=>{
+            io.to(socket.myRoom).emit('clear-all-chat');
+            msgs=[];
+        })
 
         socket.on('first-song-play', () => {
             io.to(socket.myRoom).emit('start-first-song');
@@ -63,6 +69,7 @@ function connectSockets(io) {
         //     io.to(socket.myRoom).emit('play-song',song)
         // })
         socket.on('send-song-to-all', song => {
+            console.log('play-song',song)
             io.to(socket.myRoom).emit('play-song',song)
         })
         socket.on('play-preview-curr-song', song => {
@@ -77,6 +84,7 @@ function connectSockets(io) {
         })
 
         socket.on('mix-updated',mix=>{
+            console.log('mix-updated')
             io.to(socket.myRoom).emit('mix-is-updated',mix);
         })
 
@@ -101,6 +109,7 @@ function connectSockets(io) {
 
 
         socket.on('join room', room => {
+            console.log('SOCKY MY ROOM:',socket.myRoom);
             // console.log('JOINED TO ROOM ',room);
             // socket.username = 'user';
             // io.to(room).emit('user joined',{name:'System message',txt:'New user has joind the chat'});
@@ -109,8 +118,9 @@ function connectSockets(io) {
                 socket.leave(socket.myRoom)
             }
             socket.join(room);
-            console.log('JOINED ROOM ',room);
+            console.log('JOINED ROOM ',room );
             socket.myRoom = room;
+            // console.log('SOCKY MY ROOM:',socket.myRoom);
         })
     })
 }
