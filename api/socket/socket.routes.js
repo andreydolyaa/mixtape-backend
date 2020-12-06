@@ -111,6 +111,10 @@ function connectSockets(io) {
         });
 
 
+        socket.on('return-time',time => {
+            io.to(socket.myRoom).emit('returnNewTime',time);
+        })
+
 
         socket.on('join room', room => {
             console.log('SOCKY MY ROOM:',socket.myRoom);
