@@ -21,6 +21,7 @@ function connectSockets(io) {
             console.log('maessagse msg : ',message.msg);
         })
         socket.on('set-song-playing', song => {
+            console.log('set-song-playing',song )
             io.to(socket.myRoom).emit('play-song',song);
         })
 
@@ -60,6 +61,7 @@ function connectSockets(io) {
         //     io.to(socket.myRoom).emit('play-song',song)
         // })
         socket.on('send-song-to-all', song => {
+            console.log('play-song',song)
             io.to(socket.myRoom).emit('play-song',song)
         })
         socket.on('play-preview-curr-song', song => {
@@ -74,6 +76,7 @@ function connectSockets(io) {
         })
 
         socket.on('mix-updated',mix=>{
+            console.log('mix-updated')
             io.to(socket.myRoom).emit('mix-is-updated',mix);
         })
 

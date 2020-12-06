@@ -8,7 +8,7 @@ const session = require('express-session')
 const app = express()
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-    
+       
 // Express App Config
 app.use(cookieParser())
 app.use(bodyParser.json());
@@ -18,7 +18,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }))   
-     
+      
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, 'public')));
 } else {
@@ -67,3 +67,4 @@ const port = process.env.PORT || 3030;
 http.listen(port, () => {
     logger.info('Server is running on port: ' + port)
 });
+
