@@ -17,9 +17,10 @@ function connectSockets(io) {
                 io.to(socket.myRoom).emit('stop type msg',isTyping);
         })
         socket.on('send message', message => {
-            if(!message.msg.name){
-                message.msg.name = 'Guest';
-            }
+            console.log('MESSAGE :',message);
+            // if(message.msg.name === ''){
+            //     message.msg.name = 'Guest';
+            // }
             msgs.unshift(message)
             io.to(socket.myRoom).emit('chat message', message.msg);
             console.log('maessagse msg : ',message.msg);
