@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.f855ee8aae4405b0a9249f12f313275f.js"
+  "/precache-manifest.8c6324000104d2ae8a6cdb725807c787.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "mixtape"});
